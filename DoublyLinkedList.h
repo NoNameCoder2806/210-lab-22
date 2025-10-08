@@ -154,7 +154,7 @@ public:
         Return: none
         Note: If the value is not found, no deletion occurs.
     */
-    void delete_node(int value)
+    void delete_val(int value)
     {
         if (!head)
         {
@@ -207,7 +207,17 @@ public:
         if (pos == 0)
         {
             head = head->next;
+            if (head)
+            {
+                head->prev = nullptr;
+            }
+            else
+            {
+                tail = nullptr;
+            }
+
             delete temp;
+            
             return;
         }
 
@@ -271,6 +281,29 @@ public:
         }
 
         // Delete the temp Node
+        delete temp;
+    }
+
+    void pop_back()
+    {
+        if (!tail)
+        {
+            return;
+        }
+
+        Node* temp = tail;
+
+        tail = tail->prev;
+
+        if (tail)
+        {
+            tail->next = nullptr;
+        }
+        else
+        {
+            head = nullptr;
+        }
+
         delete temp;
     }
 
