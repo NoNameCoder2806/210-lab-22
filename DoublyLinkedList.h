@@ -289,26 +289,33 @@ public:
         delete temp;
     }
 
+    /*
+        pop_front()
+        Deletes the first node (head) of the doubly linked list.
+        If the list becomes empty after deletion, tail is updated to nullptr.
+        Arguments: none
+        Return: none
+    */
     void pop_front()
     {
         // If the Linked list is empty
         if (!head)
         {
-            return;      // Exit the function
+            return;        // Exit the function
         }
 
-        // Declare a new Node
+        // Create a new Node and let it be the head
         Node* temp = head;
 
         // Advance the head
         head = head->next;
 
-        // If the new head is not null (the list is empty)
+        // If the new head is not null (the list is not empty)
         if (head)
         {
             head->prev = nullptr;      // Set the prev pointer to null
         }
-        else      // Otherwise, if the Linked list is now empty
+        else        // Otherwise, if the Linked list is now empty
         {
             tail = nullptr;            // Set the tail to null
         }
@@ -317,24 +324,34 @@ public:
         delete temp;
     }
 
+    /*
+        pop_back()
+        Deletes the last node (tail) of the doubly linked list.
+        If the list becomes empty after deletion, head is updated to nullptr.
+        Arguments: none
+        Return: none
+    */
     void pop_back()
     {
+        // If the Linked list is empty
         if (!tail)
         {
-            return;
+            return;        // Exit the function
         }
 
+        // Create a new Node and let it be the tail
         Node* temp = tail;
 
         tail = tail->prev;
 
+        // If the new tail is not null (the list is not empty)
         if (tail)
         {
-            tail->next = nullptr;
+            tail->next = nullptr;      // Set the next pointer to null
         }
-        else
+        else        // Otherwise, if the Linked list is now empty
         {
-            head = nullptr;
+            head = nullptr;            // Set the head to null
         }
 
         delete temp;
@@ -348,18 +365,26 @@ public:
     */
     void print()
     {
+        // Create a new Node and let it be the head
         Node* current = head;
 
+        // If current is null, the Linked list is empty
         if (!current)
         {
-            return;
+            // Display a message
+            cout << "The Linked List is empty!" << endl;
+
+            return;        // Exit the function
         }
 
+        // Iterate and display the data of all the Nodes
         while (current)
         {
             cout << current->data << " ";
             current = current->next;
         }
+
+        // Enter a new line
         cout << endl;
     }
 
@@ -371,19 +396,26 @@ public:
     */
     void print_reverse()
     {
+        // Create a new Node and let it be the tail
         Node* current = tail;
 
-        if (!current)        // If the Linked list is empty
+        // If current is null, the Linked list is empty
+        if (!current)
         {
-            return;
+            // Display a message
+            cout << "The Linked List is empty!" << endl;
+
+            return;        // Exit the function
         }
 
-        // While the current node is not null
+        // Iterate and display the data of all the Nodes
         while (current)
         {
             cout << current->data << " ";
             current = current->prev;
         }
+
+        // Enter a new line
         cout << endl;
     }
 };
