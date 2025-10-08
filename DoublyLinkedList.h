@@ -195,12 +195,59 @@ public:
 
     void delete_pos(int pos)
     {
+        if (!head)
+        {
+            return; // Empty list
+        }
+
+        // Create a Node to traverse
+        Node* temp = head;
+
         // Delete the head
         if (pos == 0)
         {
             head = head->next;
+            delete temp;
             return;
         }
+
+        // Declare an int counter to traverse
+        int count = 0;
+
+        while (temp && count < pos)
+        {
+            temp = temp->next;
+            count++;
+        }
+
+        if (!temp)
+        {
+            return; // Value not found
+        }
+
+        if (temp->prev)
+        {
+            temp->prev->next = temp->next;
+        }
+        else
+        {
+            head = temp->next; // Deleting the head
+        }
+
+        if (temp->next)
+        {
+            temp->next->prev = temp->prev;
+        }
+        else
+        {
+            tail = temp->prev; // Deleting the tail
+        }
+
+        delete temp;
+    }
+
+    void pop_front()
+    {
     }
 
     /*
