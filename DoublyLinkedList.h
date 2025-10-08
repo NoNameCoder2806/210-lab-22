@@ -248,6 +248,30 @@ public:
 
     void pop_front()
     {
+        // If the Linked list is empty
+        if (!head)
+        {
+            return;      // Exit the function
+        }
+
+        // Declare a new Node
+        Node* temp = head;
+
+        // Advance the head
+        head = head->next;
+
+        // If the new head is not null (the list is empty)
+        if (head)
+        {
+            head->prev = nullptr;      // Set the prev pointer to null
+        }
+        else      // Otherwise, if the Linked list is now empty
+        {
+            tail = nullptr;            // Set the tail to null
+        }
+
+        // Delete the temp Node
+        delete temp;
     }
 
     /*
