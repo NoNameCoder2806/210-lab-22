@@ -57,16 +57,22 @@ public:
     */
     void push_back(int value)
     {
+        // Create a new Node from the given value
         Node* newNode = new Node(value);
 
-        if (!tail)  // if there's no tail, the list is empty
+        // If there's no tail, the Linked list is empty
+        if (!tail)
         {
+            // We let the head and tail both point to the new Node
             head = tail = newNode;
         }
-        else
+        else        // Otherwise the Linked list is not empty
         {
-            tail->next = newNode;
-            newNode->prev = tail;
+            // Add the new Node to the tail of the Linked list
+            tail->next = newNode;        // Add the new Node to the tail
+            newNode->prev = tail;        // Let the prev pointer of it points to the previous tail
+
+            // Let tail be the new Node
             tail = newNode;
         }
     }
@@ -80,16 +86,22 @@ public:
     */
     void push_front(int value)
     {
+        // Create a new Node from the given value
         Node* newNode = new Node(value);
 
-        if (!head)  // if there's no head, the list is empty
+        // If there's no head, the list is empty
+        if (!head)
         {
+            // We let the head and tail both point to the new Node
             head = tail = newNode;
         }
-        else
+        else        // Otherwise the Linked list is not empty
         {
-            newNode->next = head;
-            head->prev = newNode;
+            // Add the new Node to the head of the Linked list
+            newNode->next = head;        // Add the new Node to the head
+            head->prev = newNode;        // Let the next pointer of it points to the previous head
+
+            // Let head be the new Node
             head = newNode;
         }
     }
@@ -105,44 +117,65 @@ public:
     */
     void insert_after(int value, int position)
     {
+        // If the position is a negative value
         if (position < 0)
         {
+            // Display an error message
             cout << "Position must be >= 0." << endl;
-            return;
+
+            return;        // Exit the function
         }
 
+        // Create a new Node from the given value
         Node* newNode = new Node(value);
+        
+        // If there's no head, the list is empty
         if (!head)
-        {
+        {   
+            // We add the new Node to the Linked list
             head = tail = newNode;
-            return;
+
+            return;        // Exit the function
         }
 
+        // Create a new Node to be the head
         Node* temp = head;
+
+        // Iterate until we reach the position or temp becomes null
         for (int i = 0; i < position && temp; ++i)
         {
+            // Advance to the next node
             temp = temp->next;
         }
 
+        // If temp becomes null, we have exceeded the Linked list
         if (!temp)
         {
+            // Display a message
             cout << "Position exceeds list size. Node not inserted.\n";
+            
+            // Delete the new Node
             delete newNode;
-            return;
+
+            return;        // Exit the function
         }
 
-        newNode->next = temp->next;
+        // Otherwise, we have reached the position we need to insert
+        newNode->next = temp->next;        // Insert the Node
         newNode->prev = temp;
 
+        // If the next Node is not null
         if (temp->next)
         {
+            // We set its prev pointer to the new Node that we just inserted
             temp->next->prev = newNode;
         }
-        else
+        else        // Otherwise, the next Node is null
         {
-            tail = newNode; // Inserting at the end
+            tail = newNode;        // Inserting at the end (let tail be the new Node)
         }
 
+        // Let temp->next points to the new Node
         temp->next = newNode;
     }
 
