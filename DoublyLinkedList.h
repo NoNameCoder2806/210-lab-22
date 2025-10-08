@@ -180,7 +180,7 @@ public:
     }
 
     /*
-        delete_node()
+        delete_val()
         Deletes the first node found with the specified value.
         Arguments:
             - value: an integer representing the value to delete
@@ -226,6 +226,14 @@ public:
         delete temp;
     }
 
+    /*
+        delete_pos()
+        Deletes the node at the specified position (0-based index) in the doubly linked list.
+        Arguments:
+            - pos: an integer representing the position of the node to delete
+        Return: none
+        Note: If the position is invalid or the list is empty, no deletion occurs.
+    */
     void delete_pos(int pos)
     {
         if (!head)
@@ -354,6 +362,7 @@ public:
             head = nullptr;            // Set the head to null
         }
 
+        // Delete the temp Node
         delete temp;
     }
 
