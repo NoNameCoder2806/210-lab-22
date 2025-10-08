@@ -99,7 +99,7 @@ public:
         {
             // Add the new Node to the head of the Linked list
             newNode->next = head;        // Add the new Node to the head
-            head->prev = newNode;        // Let the next pointer of it points to the previous head
+            head->prev = newNode;        // Let the prev pointer of the old head point to the new node
 
             // Let head be the new Node
             head = newNode;
@@ -129,7 +129,7 @@ public:
         // Create a new Node from the given value
         Node* newNode = new Node(value);
         
-        // If there's no head, the list is empty
+        // If there's no head, the Linked list is empty
         if (!head)
         {   
             // We add the new Node to the Linked list
@@ -138,7 +138,7 @@ public:
             return;        // Exit the function
         }
 
-        // Create a new Node to be the head
+        // Create a temporary Node pointer to traverse the list
         Node* temp = head;
 
         // Iterate until we reach the position or temp becomes null
@@ -189,40 +189,52 @@ public:
     */
     void delete_val(int value)
     {
+        // If there's no head, the Linked list is empty
         if (!head)
         {
-            return; // Empty list
+            return;        // Empty list
         }
 
+        // Create a temporary Node pointer to start traversal from the head
         Node* temp = head;
+
+        // Iterate until temp becomes a nullptr or the value is found
         while (temp && temp->data != value)
         {
             temp = temp->next;
         }
 
+        // If temp is null
         if (!temp)
         {
-            return; // Value not found
+            return;        // The value is not found
         }
 
+        // If temp->prev is not null, temp is not the head
         if (temp->prev)
         {
+            // Link the previous node's 'next' pointer to skip over temp
             temp->prev->next = temp->next;
         }
         else
         {
-            head = temp->next; // Deleting the head
+            // Deleting the head
+            head = temp->next;
         }
 
+        // If temp->next is not null, temp is not the tail
         if (temp->next)
         {
+            // Link the next node's 'prev' pointer to skip over temp
             temp->next->prev = temp->prev;
         }
         else
         {
-            tail = temp->prev; // Deleting the tail
+            // Deleting the tail
+            tail = temp->prev;
         }
 
+        // Delete the temp Node
         delete temp;
     }
 
@@ -236,27 +248,34 @@ public:
     */
     void delete_pos(int pos)
     {
+        // If there is no head, the Linked list is empty
         if (!head)
         {
-            return; // Empty list
+            return;        // Empty list
         }
 
-        // Create a Node to traverse
+        // Create a temporary Node pointer to start traversal from the head
         Node* temp = head;
 
         // Delete the head
         if (pos == 0)
         {
+            // Advance head to the next Node
             head = head->next;
+
+            // If head is not null, the Linked list is not empty
             if (head)
             {
+                // Let head->prev be null
                 head->prev = nullptr;
             }
-            else
+            else        // Otherwise, the Linked list is empty
             {
+                // Let the tail be null
                 tail = nullptr;
             }
 
+            // Delete the temp Node
             delete temp;
             
             return;
@@ -265,35 +284,44 @@ public:
         // Declare an int counter to traverse
         int count = 0;
 
+        // Iterate until temp is null or the position is reached
         while (temp && count < pos)
         {
             temp = temp->next;
             count++;
         }
 
+        // If temp is null
         if (!temp)
         {
-            return; // Value not found
+            return;        // The position is not found
         }
-
+        
+        // If temp->prev is not null, temp is not the head
         if (temp->prev)
         {
+            // Link the previous node's 'next' pointer to skip over temp
             temp->prev->next = temp->next;
         }
         else
         {
-            head = temp->next; // Deleting the head
+            // Deleting the head
+            head = temp->next;
         }
 
+        // If temp->next is not null, temp is not the tail
         if (temp->next)
         {
+            // Link the next node's 'prev' pointer to skip over temp
             temp->next->prev = temp->prev;
         }
         else
         {
-            tail = temp->prev; // Deleting the tail
+            // Deleting the tail
+            tail = temp->prev;
         }
 
+        // Delete the temp Node
         delete temp;
     }
 
@@ -312,7 +340,7 @@ public:
             return;        // Exit the function
         }
 
-        // Create a new Node and let it be the head
+        // Create a temporary Node pointer to store the current head
         Node* temp = head;
 
         // Advance the head
@@ -347,9 +375,10 @@ public:
             return;        // Exit the function
         }
 
-        // Create a new Node and let it be the tail
+        // Create a temporary Node pointer to store the current tail
         Node* temp = tail;
 
+        // Move the tail back to the previous Node
         tail = tail->prev;
 
         // If the new tail is not null (the list is not empty)
@@ -374,7 +403,7 @@ public:
     */
     void print()
     {
-        // Create a new Node and let it be the head
+        // Create a temporary Node pointer to start traversal from the head
         Node* current = head;
 
         // If current is null, the Linked list is empty
@@ -405,7 +434,7 @@ public:
     */
     void print_reverse()
     {
-        // Create a new Node and let it be the tail
+        // Create a temporary Node pointer to start traversal from the tail
         Node* current = tail;
 
         // If current is null, the Linked list is empty
